@@ -11,6 +11,7 @@
   z-index: 10;
   padding: 0 1rem;
   box-sizing: border-box;
+  box-shadow: 1px 1px 5px 5px rgb(199, 199, 199);
 }
 /* Navbar Logo */
 .navbarLogo {
@@ -31,8 +32,7 @@
 
 .logoName {
   width: 9.5rem;
-  height: 2rem;
-  margin-left: 1rem;
+  height: 2.7rem;
 }
 
 /* Navbar Menu */
@@ -51,9 +51,9 @@
 }
 
 .navbarMenulink:hover {
-  color: rgb(76, 124, 246);
+  color: #6c35d8;
   padding-bottom: 0.2rem;
-  border-bottom: 3px solid rgb(76, 124, 246);
+  border-bottom: 3px solid #6c35d8;
 }
 
 /* Navbar Buttons */
@@ -86,7 +86,7 @@
   border: none;
   border-radius: 3rem;
   color: white;
-  background-color: rgb(76, 124, 246);
+  background-color: #6c35d8;
   cursor: pointer;
   transition: box-shadow 0.2s ease;
 }

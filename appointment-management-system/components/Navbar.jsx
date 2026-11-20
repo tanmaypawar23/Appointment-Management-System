@@ -26,8 +26,8 @@ export default function Navbar() {
           Home
         </Link>
 
-        <Link href="/allListing" className={styles.navbarMenulink}>
-          See Request
+        <Link href="/" className={styles.navbarMenulink}>
+          Appointment
         </Link>
 
         <Link href="/" className={styles.navbarMenulink}>
@@ -42,14 +42,14 @@ export default function Navbar() {
       <div className={styles.navbar_button}>
         <button
           className={styles.login_buttton}
-          onClick={() => router.push("/auth")}
+          onClick={() => router.push("/")}
         >
           Login
         </button>
 
         <button
           className={styles.signup_buttton}
-          onClick={() => router.push("/auth")}
+          onClick={() => router.push("/")}
         >
           SignUp
         </button>
