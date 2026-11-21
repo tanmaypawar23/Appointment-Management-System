@@ -42,16 +42,16 @@ export default function Navbar() {
       <div className={styles.navbar_button}>
         <button
           className={styles.login_buttton}
-          onClick={() => router.push("/")}
+          onClick={() => router.push("/login")}
         >
           Login
         </button>
 
         <button
           className={styles.signup_buttton}
-          onClick={() => router.push("/")}
+          onClick={() => router.push("/register")}
         >
-          SignUp
+          Register
         </button>
         <button className={styles.signup_buttton} onClick={() => signOut}>
           LogOut

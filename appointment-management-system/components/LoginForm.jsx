@@ -52,6 +52,7 @@ export default function LoginForm() {
 
   const handleSumbit = async (e) => {
     e.preventDefault();
+    setError("");
 
     try {
       await signIn("credentials", {
@@ -60,13 +61,15 @@ export default function LoginForm() {
         redirect: false,
       });
 
-      if (res.error) {
-        setError("Invalid Credentials");
+      if (res?.error) {
+        setError("Invalid email or password");
       }
 
-      router.replace("dashboard");
+      router.replace("/dashboard");
+      router.refresh();
     } catch (error) {
-      console.log(error);
+      console.error("Login error:", error);
+      setError("Something went wrong. Please try again.");
     }
   };
 
@@ -79,8 +82,8 @@ export default function LoginForm() {
       >
         <Card variant="outlined">
           <div className="flex justify-center">
-            <img src="./logo.png" alt="logo" style={{ width: "4rem" }} />
-            <img src="./logoName.png" alt="logo" style={{ width: "12rem" }} />
+            <img src="/logo.png" alt="logo" style={{ width: "4rem" }} />
+            <img src="/logoName.png" alt="logo" style={{ width: "12rem" }} />
           </div>
           <Typography
             component="h1"
