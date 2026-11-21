@@ -1,7 +1,9 @@
 import { Geist, Geist_Mono } from "next/font/google";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v16-appRouter";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { AuthProvider } from "./Providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,7 +33,9 @@ export default function RootLayout({ children }) {
       <body className="">
         <>
           <Navbar />
-          {children}
+          <AppRouterCacheProvider>
+            <AuthProvider>{children}</AuthProvider>
+          </AppRouterCacheProvider>
           <Footer />
         </>
       </body>

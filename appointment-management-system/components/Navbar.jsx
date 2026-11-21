@@ -1,5 +1,5 @@
 "use client";
-
+import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import styles from "../style/Navbar.module.css";
@@ -52,6 +52,9 @@ export default function Navbar() {
           onClick={() => router.push("/")}
         >
           SignUp
+        </button>
+        <button className={styles.signup_buttton} onClick={() => signOut}>
+          LogOut
         </button>
       </div>
     </nav>
