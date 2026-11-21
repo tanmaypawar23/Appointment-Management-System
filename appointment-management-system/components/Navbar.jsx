@@ -53,7 +53,10 @@ export default function Navbar() {
         >
           Register
         </button>
-        <button className={styles.signup_buttton} onClick={() => signOut}>
+        <button
+          className={styles.signup_buttton}
+          onClick={() => signOut({ callbackUrl: "/login" })}
+        >
           LogOut
         </button>
       </div>

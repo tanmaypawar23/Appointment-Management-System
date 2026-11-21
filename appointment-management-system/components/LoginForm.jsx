@@ -55,7 +55,7 @@ export default function LoginForm() {
     setError("");
 
     try {
-      await signIn("credentials", {
+      const res = await signIn("credentials", {
         email,
         password,
         redirect: false,

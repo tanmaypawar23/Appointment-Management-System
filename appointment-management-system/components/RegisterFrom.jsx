@@ -60,7 +60,7 @@ export default function RegisterFrom() {
     }
 
     try {
-      const resUserExist = await fetch("api/userExists", {
+      const resUserExist = await fetch("/api/userExists", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -70,6 +70,10 @@ export default function RegisterFrom() {
         }),
       });
 
+      if (!resUserExist.ok) {
+        throw new Error("Unable to check existing user");
+      }
+
       const { user } = await resUserExist.json();
 
       if (user) {
@@ -77,7 +81,7 @@ export default function RegisterFrom() {
         return;
       }
 
-      const res = await fetch("api/register", {
+      const res = await fetch("/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -90,11 +94,10 @@ export default function RegisterFrom() {
       });
 
       if (res.ok) {
-        const form = e.target;
-        form.reset();
         router.push("/login");
       } else {
-        console.log("User registration failed.");
+        const data = await res.json();
+        setError(data.message || "Registration failed");
       }
     } catch (error) {
       console.log("Error during registration: ", error);
@@ -109,8 +112,8 @@ export default function RegisterFrom() {
       >
         <Card variant="outlined">
           <div className="flex justify-center">
-            <img src="./logo.png" alt="logo" style={{ width: "4rem" }} />
-            <img src="./logoName.png" alt="logo" style={{ width: "12rem" }} />
+            <img src="/logo.png" alt="logo" style={{ width: "4rem" }} />
+            <img src="/logoName.png" alt="logo" style={{ width: "12rem" }} />
           </div>
           <Typography
             component="h1"
