@@ -14,6 +14,8 @@ import Stack from "@mui/material/Stack";
 import MuiCard from "@mui/material/Card";
 import { styled } from "@mui/material/styles";
 import { useRouter } from "next/navigation";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -113,6 +115,7 @@ export default function RegisterFrom() {
   };
   return (
     <>
+      <Navbar />
       <CssBaseline enableColorScheme />
       <SignInContainer
         direction="column"
@@ -224,6 +227,7 @@ export default function RegisterFrom() {
           </Box>
         </Card>
       </SignInContainer>
+      <Footer />
     </>
   );
 }
