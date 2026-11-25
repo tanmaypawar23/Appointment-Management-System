@@ -6,9 +6,13 @@ import styles from "../style/Navbar.module.css";
 import Avatar from "@mui/material/Avatar";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Tooltip from "@mui/material/Tooltip";
+import { useSession } from "next-auth/react";
 
 export default function NavbarDashboard() {
   const router = useRouter();
+  const { data: session, status } = useSession();
+
+  const username = session?.user?.name || "User";
 
   return (
     <nav className={styles.navbar}>
@@ -25,9 +29,9 @@ export default function NavbarDashboard() {
       </div>
 
       <div className={styles.navbar_button}>
-        <Avatar alt="Tanmay Pawar" src="/static/images/avatar/1.jpg" />
+        <Avatar>{username.charAt(0).toUpperCase()}</Avatar>
         <div>
-          <h1>Tanmay Pawar</h1>
+          <h1>{status === "loading" ? "Loading..." : username}</h1>
         </div>
         <Tooltip title="LogOut">
           <button

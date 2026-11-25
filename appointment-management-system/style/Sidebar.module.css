@@ -1,0 +1,29 @@
+.sidebar {
+  width: 4rem;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1.5rem;
+  background-color: #ffffff;
+  border-right: 1px solid #e8e5ef;
+  box-shadow: 2px 0 10px rgba(23, 33, 59, 0.04);
+  z-index: 1000;
+}
+
+.menuButton {
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  border-radius: 12px !important;
+  color: #6c35d8 !important;
+  transition: all 0.3s ease !important;
+}
+
+.menuButton:hover {
+  background-color: #f1ebff !important;
+  transform: scale(1.05);
+}
