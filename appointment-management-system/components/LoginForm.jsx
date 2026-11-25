@@ -68,8 +68,18 @@ export default function LoginForm() {
         return;
       }
 
-      router.replace("/dashboard");
-      router.refresh();
+      if (res?.ok) {
+        const sessionRes = await fetch("/api/auth/session");
+        const session = await sessionRes.json();
+
+        if (session?.user?.role === "admin") {
+          router.replace("/admin-dashboard");
+        } else {
+          router.replace("/dashboard");
+        }
+
+        router.refresh();
+      }
     } catch (error) {
       console.error("Login error:", error);
       setError("Something went wrong. Please try again.");
