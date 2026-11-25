@@ -47,6 +47,7 @@ export default function RegisterFrom() {
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
   const [error, setError] = React.useState("");
 
   const router = useRouter();
@@ -54,10 +55,17 @@ export default function RegisterFrom() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!name || !email || !password) {
+    if (!name || !email || !password || !confirmPassword) {
       setError("All fields are necessary.");
       return;
     }
+
+    if (password !== confirmPassword) {
+      setError("Password does not match!");
+      return;
+    }
+
+    setError("");
 
     try {
       const resUserExist = await fetch("/api/userExists", {
@@ -180,6 +188,24 @@ export default function RegisterFrom() {
                 fullWidth
                 variant="outlined"
                 onChange={(e) => setPassword(e.target.value)}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel htmlFor="confirmPassword">Confirm Password</FormLabel>
+              <TextField
+                name="password"
+                placeholder="••••••"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                autoFocus
+                required
+                fullWidth
+                variant="outlined"
+                onChange={(e) => {
+                  setConfirmPassword(e.target.value);
+                  setError("");
+                }}
               />
             </FormControl>
             {<p style={{ color: "red" }}>{error}</p>}

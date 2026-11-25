@@ -151,7 +151,7 @@ export default function LoginForm() {
                 variant="body2"
                 sx={{ alignSelf: "center" }}
               >
-                SignUp
+                Register
               </Link>
             </Typography>
           </Box>
