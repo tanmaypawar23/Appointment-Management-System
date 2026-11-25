@@ -26,8 +26,8 @@ export default function Navbar() {
           Home
         </Link>
 
-        <Link href="/" className={styles.navbarMenulink}>
-          Appointment
+        <Link href="/dashboard" className={styles.navbarMenulink}>
+          Dashboard
         </Link>
 
         <Link href="/" className={styles.navbarMenulink}>
@@ -52,12 +52,6 @@ export default function Navbar() {
           onClick={() => router.push("/register")}
         >
           Register
-        </button>
-        <button
-          className={styles.signup_buttton}
-          onClick={() => signOut({ callbackUrl: "/login" })}
-        >
-          LogOut
         </button>
       </div>
     </nav>
