@@ -1,76 +1,53 @@
 "use client";
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import Button from "@mui/material/Button";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+
+import { useState } from "react";
+import Link from "next/link";
 import styles from "../style/Sidebar.module.css";
 import DehazeIcon from "@mui/icons-material/Dehaze";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import EventIcon from "@mui/icons-material/Event";
+import SettingsIcon from "@mui/icons-material/Settings";
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function Sidebar() {
-  const [open, setOpen] = React.useState(false);
-
-  const toggleDrawer = (newOpen) => () => {
-    setOpen(newOpen);
-  };
-
-  const DrawerList = (
-    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
-      <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
+  const [open, setOpen] = useState(false);
 
   return (
-    <div className={styles.sidebar}>
-      <Button className={styles.menuButton} onClick={toggleDrawer(true)}>
-        <DehazeIcon />
-      </Button>
+    <aside
+      className={`${styles.sidebar} ${
+        open ? styles.sidebarOpen : styles.sidebarClosed
+      }`}
+    >
+      <div className={styles.sidebarHeader}>
+        <button
+          className={styles.menuButton}
+          onClick={() => setOpen(!open)}
+          aria-label={open ? "Close sidebar" : "Open sidebar"}
+        >
+          {open ? <CloseIcon /> : <DehazeIcon />}
+        </button>
 
-      <Drawer
-        open={open}
-        onClose={toggleDrawer(false)}
-        PaperProps={{
-          sx: {
-            width: 260,
-            backgroundColor: "#ffffff",
-            borderRadius: "0 16px 16px 0",
-            border: "none",
-          },
-        }}
-      >
-        {DrawerList}
-      </Drawer>
-    </div>
+        {open && <h3>Menu</h3>}
+      </div>
+
+      {open && (
+        <div className={styles.sidebarContent}>
+          <Link href="/dashboard" className={styles.sidebarLink}>
+            <DashboardIcon />
+            <span>Dashboard</span>
+          </Link>
+
+          <Link href="/dashboard" className={styles.sidebarLink}>
+            <EventIcon />
+            <span>Appointments</span>
+          </Link>
+
+          <Link href="/dashboard" className={styles.sidebarLink}>
+            <SettingsIcon />
+            <span>Settings</span>
+          </Link>
+        </div>
+      )}
+    </aside>
   );
 }

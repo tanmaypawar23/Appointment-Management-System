@@ -16,6 +16,10 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -49,6 +53,7 @@ export default function LoginForm() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [error, setError] = React.useState("");
+  const [showPassword, setShowPassword] = React.useState(false);
 
   const router = useRouter();
 
@@ -138,17 +143,35 @@ export default function LoginForm() {
             </FormControl>
             <FormControl>
               <FormLabel htmlFor="password">Password</FormLabel>
+
               <TextField
                 name="password"
                 placeholder="••••••"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 id="password"
                 autoComplete="current-password"
-                autoFocus
                 required
                 fullWidth
                 variant="outlined"
                 onChange={(e) => setPassword(e.target.value)}
+                slotProps={{
+                  input: {
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          onClick={() => setShowPassword((prev) => !prev)}
+                          edge="end"
+                          type="button"
+                          aria-label={
+                            showPassword ? "Hide password" : "Show password"
+                          }
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  },
+                }}
               />
             </FormControl>
             {<p style={{ color: "red" }}>{error}</p>}

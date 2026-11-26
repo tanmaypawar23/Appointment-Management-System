@@ -1,0 +1,20 @@
+.dashboardPage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f7fc;
+}
+
+.dashboardBody {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  align-items: stretch;
+}
+
+.dashboardContent {
+  flex: 1;
+  min-width: 0;
+  padding: 25px;
+  overflow-x: auto;
+}

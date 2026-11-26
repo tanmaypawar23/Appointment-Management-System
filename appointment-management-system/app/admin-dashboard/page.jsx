@@ -1,9 +1,7 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "../api/auth/[...nextauth]/route";
-
-import Footer from "@/components/Footer";
-import NavbarDashboard from "@/components/NavbarDashboard";
+import DashboardLayout from "@/components/DashboardLayout";
 
 export default async function AdminDashboard() {
   const session = await getServerSession(authOptions);
@@ -17,12 +15,8 @@ export default async function AdminDashboard() {
   }
 
   return (
-    <>
-      <NavbarDashboard />
-
+    <DashboardLayout>
       <h1>Welcome Admin!</h1>
-
-      <Footer />
-    </>
+    </DashboardLayout>
   );
 }

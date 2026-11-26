@@ -16,6 +16,10 @@ import { styled } from "@mui/material/styles";
 import { useRouter } from "next/navigation";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -51,6 +55,8 @@ export default function RegisterFrom() {
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
   const [error, setError] = React.useState("");
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
 
   const router = useRouter();
 
@@ -62,6 +68,33 @@ export default function RegisterFrom() {
       return;
     }
 
+    // Password validation
+    if (password.length < 8) {
+      setError("Password must contain at least 8 characters.");
+      return;
+    }
+
+    if (!/[A-Z]/.test(password)) {
+      setError("Password must contain at least one uppercase letter.");
+      return;
+    }
+
+    if (!/[a-z]/.test(password)) {
+      setError("Password must contain at least one lowercase letter.");
+      return;
+    }
+
+    if (!/[0-9]/.test(password)) {
+      setError("Password must contain at least one number.");
+      return;
+    }
+
+    if (!/[!@#$%^&*(),.?":{}|<>_\-]/.test(password)) {
+      setError("Password must contain at least one special character.");
+      return;
+    }
+
+    // Confirm password validation
     if (password !== confirmPassword) {
       setError("Password does not match!");
       return;
@@ -171,7 +204,6 @@ export default function RegisterFrom() {
                 name="email"
                 placeholder="your@email.com"
                 autoComplete="email"
-                autoFocus
                 required
                 fullWidth
                 variant="outlined"
@@ -183,31 +215,73 @@ export default function RegisterFrom() {
               <TextField
                 name="password"
                 placeholder="••••••"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 id="password"
                 autoComplete="current-password"
-                autoFocus
                 required
                 fullWidth
                 variant="outlined"
                 onChange={(e) => setPassword(e.target.value)}
+                slotProps={{
+                  input: {
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          onClick={() => setShowPassword((prev) => !prev)}
+                          edge="end"
+                          type="button"
+                          aria-label={
+                            showPassword ? "Hide password" : "Show password"
+                          }
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  },
+                }}
               />
             </FormControl>
             <FormControl>
               <FormLabel htmlFor="confirmPassword">Confirm Password</FormLabel>
               <TextField
-                name="password"
+                name="confirmPassword"
                 placeholder="••••••"
-                type="password"
-                id="password"
+                type={showConfirmPassword ? "text" : "password"}
+                id="confirmPassword"
                 autoComplete="current-password"
-                autoFocus
                 required
                 fullWidth
                 variant="outlined"
                 onChange={(e) => {
                   setConfirmPassword(e.target.value);
                   setError("");
+                }}
+                slotProps={{
+                  input: {
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          onClick={() =>
+                            setShowConfirmPassword((prev) => !prev)
+                          }
+                          edge="end"
+                          type="button"
+                          aria-label={
+                            showConfirmPassword
+                              ? "Hide password"
+                              : "Show password"
+                          }
+                        >
+                          {showConfirmPassword ? (
+                            <VisibilityOff />
+                          ) : (
+                            <Visibility />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  },
                 }}
               />
             </FormControl>

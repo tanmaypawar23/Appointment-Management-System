@@ -1,15 +1,17 @@
 "use client";
-import NavbarDashboard from "@/components/NavbarDashboard";
+
 import { useSession } from "next-auth/react";
+import DashboardLayout from "@/components/DashboardLayout";
 
 export default function Dashboard() {
   const { data: session, status } = useSession();
 
   const username = session?.user?.name || "User";
+
   return (
-    <>
-      <NavbarDashboard />
-      <h1>Welcome {username}!</h1>
-    </>
+    <DashboardLayout>
+      <h1>Hello {status === "loading" ? "..." : username}!</h1>
+      <h1>Welcome to Dashboard!!</h1>
+    </DashboardLayout>
   );
 }
